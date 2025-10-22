@@ -1,0 +1,1 @@
+extends XROrigin3D

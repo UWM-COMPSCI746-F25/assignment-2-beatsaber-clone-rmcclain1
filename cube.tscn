@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn8x0bp6bxxy4"]
+
+[ext_resource type="Script" uid="uid://ddxld3c2iicwr" path="res://cube.gd" id="1_jbd7x"]
+[ext_resource type="Texture2D" uid="uid://cu13d4agpeusb" path="res://art/arrow-icon--myiconfinder-23.png" id="2_ftslj"]
+[ext_resource type="AudioStream" uid="uid://cbo3tbp20203q" path="res://addons/cinematic-impact-hit-352702.mp3" id="2_wd2d1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ftslj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n65sj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_ftslj"]
+
+[node name="Cube" type="Area3D"]
+collision_layer = 2
+script = ExtResource("1_jbd7x")
+arrow_texture = ExtResource("2_ftslj")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ftslj")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n65sj")
+
+[node name="HitSfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_wd2d1")
+
+[node name="Arrow" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_ftslj")

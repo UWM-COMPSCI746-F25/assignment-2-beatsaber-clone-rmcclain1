@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Project_BeatSaber_McClain"
+run/main_scene="uid://bq1wrnh4yweq3"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[input]
+
+xr_right_primary={
+"deadzone": 0.2,
+"events": []
+}
+xr_left_primary={
+"deadzone": 0.2,
+"events": []
+}
+xr_recenter={
+"deadzone": 0.2,
+"events": []
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+
+[xr]
+
+openxr/enabled=true
+openxr/default_action_map="uid://5r5tgutddlid"
+shaders/enabled=true

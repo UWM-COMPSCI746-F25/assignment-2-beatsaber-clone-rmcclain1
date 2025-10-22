@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://bq1wrnh4yweq3"]
+
+[ext_resource type="Script" uid="uid://duj2ruv2yqoip" path="res://Game.gd" id="1_7mycd"]
+[ext_resource type="Script" uid="uid://dip6g7ciql75p" path="res://XRStart.gd" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cp2alxiyekm" path="res://laser_sword_left.gd" id="3_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cnwp7ndjr4s8y" path="res://Quest2Controllers/OculusQuest2TouchController_Left.gltf" id="3_kek77"]
+[ext_resource type="Script" uid="uid://d0po7fuwwopkh" path="res://laser_sword_right.gd" id="4_kek77"]
+[ext_resource type="Script" uid="uid://d2qwkawiykasl" path="res://cube_spawner.gd" id="5_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bc8lh0rihgxvi" path="res://Quest2Controllers/OculusQuest2TouchController_Right.gltf" id="6_dg77c"]
+[ext_resource type="PackedScene" uid="uid://dn8x0bp6bxxy4" path="res://cube.tscn" id="6_efxa6"]
+[ext_resource type="Texture2D" uid="uid://cu13d4agpeusb" path="res://art/arrow-icon--myiconfinder-23.png" id="9_kek77"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_7mycd")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+script = ExtResource("2_272bh")
+target_path = NodePath("../CubeSpawner")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LeftController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+pose = &"aim"
+
+[node name="OculusQuest2TouchController_Left" parent="XROrigin3D/LeftController" instance=ExtResource("3_kek77")]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="LaserSwordLeft" type="Area3D" parent="XROrigin3D/LeftController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+collision_mask = 2
+script = ExtResource("3_5vw27")
+
+[node name="Collider" type="CollisionShape3D" parent="XROrigin3D/LeftController/LaserSwordLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="Beam" type="MeshInstance3D" parent="XROrigin3D/LeftController/LaserSwordLeft"]
+
+[node name="RightController" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0.5)
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="OculusQuest2TouchController_Right" parent="XROrigin3D/RightController" instance=ExtResource("6_dg77c")]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="LaserSwordRight" type="Area3D" parent="XROrigin3D/RightController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+collision_mask = 2
+script = ExtResource("4_kek77")
+
+[node name="Collider" type="CollisionShape3D" parent="XROrigin3D/RightController/LaserSwordRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="Beam" type="MeshInstance3D" parent="XROrigin3D/RightController/LaserSwordRight"]
+
+[node name="CubeSpawner" type="Node3D" parent="."]
+script = ExtResource("5_4c57u")
+cube_scene = ExtResource("6_efxa6")
+origin_path = NodePath("..")
+arrow_texture = ExtResource("9_kek77")
